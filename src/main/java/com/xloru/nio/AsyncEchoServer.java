@@ -13,6 +13,12 @@ public class AsyncEchoServer {
     private AsynchronousServerSocketChannel serverChannel;
     private AsynchronousSocketChannel clientChannel;
 
+    /**
+     * serverSocketChannel 主要提供 accept 方法阻塞监听客户端连接
+     * 一旦建立连接，实际上是在用 socketChannel 进行数据交互
+     * socketChannel 提供具体的读写方法
+     * 下面的 completionHandler 使用一种递归的机制完成持续监听
+     */
     public AsyncEchoServer() {
         try {
             serverChannel = AsynchronousServerSocketChannel.open();
